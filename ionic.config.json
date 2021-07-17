@@ -1,0 +1,7 @@
+{
+  "name": "wif-impulse-tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
