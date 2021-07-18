@@ -1,27 +1,50 @@
-import { IonPage } from "@ionic/react"
-import { RouteComponentProps } from "react-router";
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter } from "@ionic/react"
+import React from "react";
+import { RouteComponentProps, StaticContext, useHistory } from "react-router";
+import { ActionSet } from "../model/ActionSet";
+import { getActivityLimitData } from "../services/ActivityLimits";
 
-interface PhaseProps {
-    germany: string,
-    italy: string,
-    japan: string,
-    cw: string,
-    france: string,
-    usa: string,
-    ussr: string,
-    china: string
-}
+const Phases: React.FC<RouteComponentProps<{}, StaticContext, ActionSet>> = (props) => {
 
-interface Props extends RouteComponentProps {}
+    const [index, setIndex] = React.useState(0);
+    const history = useHistory();
 
-const Phases: React.FC<Props> = (props) => {
-    const { state } = props.location;
+    useIonViewDidEnter(() => {
+        setIndex(0);
+    });
+
+    const state: ActionSet = props.location.state;
     console.debug(state);
+    const limitData = getActivityLimitData();
+    let actionList = Object.keys(limitData);
+    let actionElements = actionList.map((action) => {
+        return (
+            <h1>{action}</h1>
+        );
+    });
+
+    let nextStep = () => {
+        if (index === actionList.length - 1) {
+            history.push('/home');
+        }
+        setIndex(index + 1);
+        console.debug(index);
+    }
+
     return (
         <IonPage>
-            Time to play!
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>{actionList[index]}</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent>
+                {actionElements[index]}
+                <IonButton onClick={nextStep} size="large" color="primary">Next</IonButton>
+            </IonContent>
         </IonPage>
     );
 }
 
 export default Phases;
+
