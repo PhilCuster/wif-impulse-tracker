@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { RouteComponentProps, StaticContext, useHistory } from "react-router";
 import { ActionSet } from "../model/ActionSet";
-import { getActivityLimitData } from "../services/ActivityLimits";
+import { getActivityLimitData, getActivityNotes } from "../services/ActivityLimits";
 import { displayCountry, displayPhase } from "../utils/formatting";
 import { getActivityLimit } from "../utils/activities";
 
@@ -27,6 +27,7 @@ const Phases: React.FC<RouteComponentProps<{}, StaticContext, ActionSet>> = (
   const state: ActionSet = props.location.state;
   console.debug(state);
   const limitData = getActivityLimitData();
+  const notes = getActivityNotes();
   let actionList = Object.keys(limitData);
   let actionElements = actionList.map((action) => {
     let limits: JSX.Element[] = [];
@@ -50,10 +51,18 @@ const Phases: React.FC<RouteComponentProps<{}, StaticContext, ActionSet>> = (
         }
       });
     }
+    let notesHtml = (<div></div>);
+    if (Object.keys(notes).includes(action)) {
+      notesHtml = (
+        //@ts-ignore
+        <div>Notes: {notes[action]}</div>
+      );
+    }
     return (
       <div>
         <h2>Phase: {displayPhase(action)}</h2>
         <ul>{limits}</ul>
+        {notesHtml}
       </div>
     );
   });
