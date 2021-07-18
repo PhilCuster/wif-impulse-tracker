@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "wif-impulse-tracker",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

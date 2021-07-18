@@ -1,11 +1,20 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonRouterOutlet } from '@ionic/react';
-import { Route } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
-import Actions from './Actions';
-import './Home.css';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonRouterOutlet,
+  IonGrid,
+  IonRow,
+} from "@ionic/react";
+import { Route } from "react-router";
+import ExploreContainer from "../components/ExploreContainer";
+import Actions from "./Actions";
+import "./Home.css";
 
 const Home: React.FC = () => {
-
   return (
     <IonPage>
       <IonHeader>
@@ -19,8 +28,22 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonButton routerLink="actions/axis" color="dark" size="large">Axis</IonButton>
-        <IonButton routerLink="actions/allied" color="light" size="large">Allied</IonButton>
+        <IonGrid>
+          <IonRow>
+            <div className="side-button-container">
+              <IonButton className="side-button" routerLink="actions/axis" color="dark" size="large">
+                Axis
+              </IonButton>
+            </div>
+          </IonRow>
+          <IonRow>
+            <div className="side-button-container">
+              <IonButton className="side-button" routerLink="actions/allied" color="light" size="large">
+                Allied
+              </IonButton>
+            </div>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );

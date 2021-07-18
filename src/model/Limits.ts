@@ -1,4 +1,5 @@
 export interface ActivityLimit {
+    [key: string]: PowerMap,
     land: PowerMap,
     naval: PowerMap,
     air: PowerMap,
@@ -6,6 +7,7 @@ export interface ActivityLimit {
 }
 
 export interface PowerMap {
+    [key: string]: number,
     germany: number,
     italy: number,
     japan: number,
@@ -17,6 +19,7 @@ export interface PowerMap {
 }
 
 export interface Activities {
+    [key: string]: ActivityLimit,
     "port attack": ActivityLimit,
     "naval air": ActivityLimit,
     "naval movement": ActivityLimit,
